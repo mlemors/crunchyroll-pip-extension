@@ -50,3 +50,7 @@ Done.
 ## Note
 
 If PiP does not start for a specific stream, this is usually caused by browser/DRM limitations in the player.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
