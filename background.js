@@ -6,12 +6,12 @@ async function runTogglePip(tabId) {
     func: async () => {
       const videos = Array.from(document.querySelectorAll('video'));
       if (!videos.length) {
-        throw new Error('Kein Videoelement gefunden.');
+        throw new Error('No video element found.');
       }
 
       const video = videos.find((v) => !v.paused && v.readyState >= 2) || videos[0];
 
-      // Manche Player setzen dieses Flag, um PiP im UI zu blockieren.
+      // Some players set this flag to block PiP in the UI.
       if (video.hasAttribute('disablePictureInPicture')) {
         video.removeAttribute('disablePictureInPicture');
       }
@@ -27,13 +27,13 @@ async function runTogglePip(tabId) {
         return;
       }
 
-      // Fallback für WebKit-basierte Varianten.
+      // Fallback for WebKit-based variants.
       if (typeof video.webkitSetPresentationMode === 'function') {
         video.webkitSetPresentationMode('picture-in-picture');
         return;
       }
 
-      throw new Error('PiP wird von diesem Browser/Video nicht unterstützt.');
+      throw new Error('PiP is not supported by this browser/video.');
     }
   });
 }
@@ -51,8 +51,8 @@ chrome.commands.onCommand.addListener(async (command) => {
   try {
     await runTogglePip(tab.id);
   } catch (err) {
-    // Fehler stillschweigend behandeln; Content-Button zeigt sie als Toast an.
-    console.warn('PiP-Toggle fehlgeschlagen:', err);
+    // Handle silently; content button displays errors as a toast.
+    console.warn('PiP toggle failed:', err);
   }
 });
 
@@ -64,6 +64,6 @@ chrome.action.onClicked.addListener(async (tab) => {
   try {
     await runTogglePip(tab.id);
   } catch (err) {
-    console.warn('PiP-Toggle fehlgeschlagen:', err);
+    console.warn('PiP toggle failed:', err);
   }
 });

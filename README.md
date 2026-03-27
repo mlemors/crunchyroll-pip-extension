@@ -1,41 +1,41 @@
 # Crunchyroll PiP Extension (v1)
 
-Diese Browser-Erweiterung fügt bei Crunchyroll einen **Picture-in-Picture (PiP)**-Button direkt in die Player-Steuerung ein.
+This browser extension adds a **Picture-in-Picture (PiP)** button directly to the Crunchyroll player controls.
 
-Der Button erscheint nur:
-- auf Episoden-Seiten (`/watch/...`)
-- wenn das Video gestartet wurde
+The button appears only:
+- on episode pages (`/watch/...`)
+- after playback has started
 
-## Was funktioniert
+## Features
 
-- PiP-Button in der rechten Player-Leiste
-- Position: links vom Untertitel-/Track-Button
-- Tastenkürzel:
+- PiP button inside the right-side player controls
+- Position: directly left of the subtitle/track button
+- Keyboard shortcut:
   - **macOS:** `Option + Shift + P`
   - **Windows/Linux:** `Alt + Shift + P`
 
 ## Installation (Brave / Chrome)
 
-1. Dieses Repository herunterladen oder klonen.
-2. In Brave/Chrome `brave://extensions` oder `chrome://extensions` öffnen.
-3. Oben rechts **Entwicklermodus** aktivieren.
-4. Auf **Entpackte Erweiterung laden** klicken.
-5. Den Ordner dieses Repos auswählen.
+1. Download or clone this repository.
+2. Open `brave://extensions` or `chrome://extensions`.
+3. Enable **Developer mode** (top-right).
+4. Click **Load unpacked**.
+5. Select this repository folder.
 
-Fertig.
+Done.
 
-## Nutzung
+## Usage
 
-1. Crunchyroll-Episode öffnen.
-2. Video starten.
-3. PiP-Button im Player anklicken oder Tastenkürzel verwenden.
+1. Open a Crunchyroll episode.
+2. Start the video.
+3. Click the PiP button in the player controls, or use the keyboard shortcut.
 
-## Update nach Änderungen
+## Updating after changes
 
-1. `brave://extensions` öffnen.
-2. Bei der Erweiterung auf **Neu laden** klicken.
-3. Crunchyroll-Tab neu laden.
+1. Open `brave://extensions`.
+2. Click **Reload** on the extension card.
+3. Refresh your Crunchyroll tab.
 
-## Hinweis
+## Note
 
-Wenn PiP bei bestimmten Streams nicht startet, liegt das meist an Browser-/DRM-Einschränkungen des Players.
+If PiP does not start for a specific stream, this is usually caused by browser/DRM limitations in the player.

@@ -71,7 +71,7 @@ function hasStartedPlayback(video) {
 async function togglePiP() {
   const video = getActiveVideo();
   if (!video) {
-    showToast('Kein Video gefunden. Starte erst eine Episode.');
+    showToast('No video found. Start an episode first.');
     return;
   }
 
@@ -96,9 +96,9 @@ async function togglePiP() {
       return;
     }
 
-    showToast('PiP wird auf dieser Seite nicht unterstützt.');
+    showToast('PiP is not supported on this page.');
   } catch (error) {
-    showToast(`PiP fehlgeschlagen: ${error?.message || 'Unbekannter Fehler'}`);
+    showToast(`PiP failed: ${error?.message || 'Unknown error'}`);
   }
 }
 
@@ -153,7 +153,7 @@ function normalizePipButtonStyle(pipBtn, referenceButton) {
   const refRect = referenceButton.getBoundingClientRect();
   const refStyle = window.getComputedStyle(referenceButton);
 
-  // Falls noch ein alter Floating-Button aus vorherigen Versionen existiert:
+  // Remove legacy floating-button styles from previous versions:
   pipBtn.style.position = '';
   pipBtn.style.right = '';
   pipBtn.style.bottom = '';
