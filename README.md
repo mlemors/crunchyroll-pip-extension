@@ -1,6 +1,9 @@
-[![Download v1.0.0](https://img.shields.io/badge/Download-v1.0.0-2ea44f?style=for-the-badge&logo=github)](https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip)
-
-# Crunchyroll PiP Extension
+<h1>
+  Crunchyroll PiP Extension
+  <a href="https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip">
+    <img alt="Download v1.0.0" src="https://img.shields.io/badge/Download-v1.0.0-2ea44f?style=for-the-badge&logo=github">
+  </a>
+</h1>
 
 This browser extension adds a **Picture-in-Picture (PiP)** button directly to the Crunchyroll player controls.
 
@@ -29,9 +32,6 @@ The button appears only:
 Done.
 
 ## Install from GitHub Release (ZIP)
-
-Direct download (v1.0.0):  
-[Download crunchyroll-pip-extension-v1.0.0.zip](https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip)
 
 1. Open the repository's **Releases** page on GitHub.
 2. Download `crunchyroll-pip-extension-vX.Y.Z.zip` from release assets.
