@@ -1,3 +1,5 @@
+[![Download v1.0.0](https://img.shields.io/badge/Download-v1.0.0-2ea44f?style=for-the-badge&logo=github)](https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip)
+
 # Crunchyroll PiP Extension
 
 This browser extension adds a **Picture-in-Picture (PiP)** button directly to the Crunchyroll player controls.
