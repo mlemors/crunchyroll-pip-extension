@@ -26,6 +26,15 @@ The button appears only:
 
 Done.
 
+## Install from GitHub Release (ZIP)
+
+1. Open the repository's **Releases** page on GitHub.
+2. Download `crunchyroll-pip-extension-vX.Y.Z.zip` from release assets.
+3. Extract the ZIP.
+4. Open `brave://extensions` (or `chrome://extensions`).
+5. Enable **Developer mode**.
+6. Click **Load unpacked** and select the extracted folder.
+
 ## Usage
 
 1. Open a Crunchyroll episode.
@@ -37,6 +46,20 @@ Done.
 1. Open `brave://extensions`.
 2. Click **Reload** on the extension card.
 3. Refresh your Crunchyroll tab.
+
+## Maintainer: create a release ZIP
+
+Run:
+
+```bash
+./scripts/build-release-zip.sh
+```
+
+This creates:
+
+- `dist/crunchyroll-pip-extension-v<version>.zip`
+
+Then attach that ZIP file to a GitHub Release.
 
 ## Note
 
