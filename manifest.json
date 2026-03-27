@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Crunchyroll PiP Helper",
+  "description": "Erzwingt Picture-in-Picture für Crunchyroll-Videos per Button oder Tastenkürzel.",
+  "version": "1.0.0",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": [
+    "https://www.crunchyroll.com/*",
+    "https://crunchyroll.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-pip": {
+      "suggested_key": {
+        "default": "Alt+Shift+P"
+      },
+      "description": "Picture-in-Picture für das aktive Crunchyroll-Video starten"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.crunchyroll.com/*",
+        "https://crunchyroll.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Crunchyroll PiP"
+  }
+}
