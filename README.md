@@ -47,20 +47,6 @@ Done.
 2. Click **Reload** on the extension card.
 3. Refresh your Crunchyroll tab.
 
-## Maintainer: create a release ZIP
-
-Run:
-
-```bash
-./scripts/build-release-zip.sh
-```
-
-This creates:
-
-- `dist/crunchyroll-pip-extension-v<version>.zip`
-
-Then attach that ZIP file to a GitHub Release.
-
 ## Note
 
 If PiP does not start for a specific stream, this is usually caused by browser/DRM limitations in the player.
