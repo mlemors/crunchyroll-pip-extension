@@ -28,6 +28,9 @@ Done.
 
 ## Install from GitHub Release (ZIP)
 
+Direct download (v1.0.0):  
+[Download crunchyroll-pip-extension-v1.0.0.zip](https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip)
+
 1. Open the repository's **Releases** page on GitHub.
 2. Download `crunchyroll-pip-extension-vX.Y.Z.zip` from release assets.
 3. Extract the ZIP.
