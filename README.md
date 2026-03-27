@@ -2,6 +2,8 @@
 
 This browser extension adds a **Picture-in-Picture (PiP)** button directly to the Crunchyroll player controls.
 
+![Crunchyroll PiP preview](assets/preview.png)
+
 The button appears only:
 - on episode pages (`/watch/...`)
 - after playback has started
