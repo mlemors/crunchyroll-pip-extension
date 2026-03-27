@@ -1,4 +1,4 @@
-# Crunchyroll PiP Extension (v1)
+# Crunchyroll PiP Extension
 
 This browser extension adds a **Picture-in-Picture (PiP)** button directly to the Crunchyroll player controls.
 
