@@ -27,10 +27,10 @@ The button appears only:
 - Not officially supported: Firefox (different extension API behavior and packaging)
 - Not supported: Safari
 
-## Installation (Brave / Chrome)
+## Installation
 
 1. Download or clone this repository.
-2. Open `brave://extensions` or `chrome://extensions`.
+2. Open `chrome://extensions`.
 3. Enable **Developer mode** (top-right).
 4. Click **Load unpacked**.
 5. Select this repository folder.
@@ -42,7 +42,7 @@ Done.
 1. Open the repository's **Releases** page on GitHub.
 2. Download `crunchyroll-pip-extension-vX.Y.Z.zip` from release assets.
 3. Extract the ZIP.
-4. Open `brave://extensions` (or `chrome://extensions`).
+4. Open `chrome://extensions`.
 5. Enable **Developer mode**.
 6. Click **Load unpacked** and select the extracted folder.
 
@@ -54,7 +54,7 @@ Done.
 
 ## Updating after changes
 
-1. Open `brave://extensions`.
+1. Open `chrome://extensions`.
 2. Click **Reload** on the extension card.
 3. Refresh your Crunchyroll tab.
 
