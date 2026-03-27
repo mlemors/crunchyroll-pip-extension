@@ -21,6 +21,12 @@ The button appears only:
   - **macOS:** `Option + Shift + P`
   - **Windows/Linux:** `Alt + Shift + P`
 
+## Browser Compatibility
+
+- Supported: Chromium-based browsers (Brave, Google Chrome, Microsoft Edge, Vivaldi, Opera)
+- Not officially supported: Firefox (different extension API behavior and packaging)
+- Not supported: Safari
+
 ## Installation (Brave / Chrome)
 
 1. Download or clone this repository.
