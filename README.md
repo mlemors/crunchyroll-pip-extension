@@ -1,7 +1,7 @@
 <h1>
   Crunchyroll PiP Extension
-  <a href="https://github.com/mlemors/crunchyroll-pip-extension/releases/download/v1.0.0/crunchyroll-pip-extension-v1.0.0.zip">
-    <img alt="Download v1.0.0" src="https://img.shields.io/badge/Download-v1.0.0-2ea44f?style=for-the-badge&logo=github">
+  <a href="https://github.com/mlemors/crunchyroll-pip-extension/releases/latest">
+    <img alt="Latest release" src="https://img.shields.io/github/v/release/mlemors/crunchyroll-pip-extension?display_name=tag&style=for-the-badge&label=Download&logo=github">
   </a>
 </h1>
 
@@ -21,30 +21,31 @@ The button appears only:
   - **macOS:** `Option + Shift + P`
   - **Windows/Linux:** `Alt + Shift + P`
 
-## Browser Compatibility
+## Browser compatibility
 
 - Supported: Chromium-based browsers (Brave, Google Chrome, Microsoft Edge, Vivaldi, Opera)
-- Not officially supported: Firefox (different extension API behavior and packaging)
-- Not supported: Safari
+- Not officially supported: Firefox and Safari
 
-## Installation
+The extension uses Chromium extension APIs. The WebKit PiP fallback in the video code does not make the extension itself Safari-compatible.
+
+## Installation from a GitHub release
+
+1. Open the repository's [Releases](https://github.com/mlemors/crunchyroll-pip-extension/releases) page.
+2. Download the ZIP from the latest release.
+3. Extract the ZIP to a permanent folder.
+4. Open `chrome://extensions`.
+5. Enable **Developer mode** (top-right).
+6. Click **Load unpacked** and select the extracted folder.
+
+Keep the extracted folder in place; the browser loads the extension directly from it.
+
+## Installation from source
 
 1. Download or clone this repository.
 2. Open `chrome://extensions`.
 3. Enable **Developer mode** (top-right).
 4. Click **Load unpacked**.
 5. Select this repository folder.
-
-Done.
-
-## Install from GitHub Release (ZIP)
-
-1. Open the repository's **Releases** page on GitHub.
-2. Download `crunchyroll-pip-extension-vX.Y.Z.zip` from release assets.
-3. Extract the ZIP.
-4. Open `chrome://extensions`.
-5. Enable **Developer mode**.
-6. Click **Load unpacked** and select the extracted folder.
 
 ## Usage
 
@@ -58,9 +59,21 @@ Done.
 2. Click **Reload** on the extension card.
 3. Refresh your Crunchyroll tab.
 
-## Note
+## Troubleshooting
 
-If PiP does not start for a specific stream, this is usually caused by browser/DRM limitations in the player.
+- The button appears only on episode pages (`/watch/...`) after playback has started.
+- If the button is missing after an update, reload the extension and refresh the Crunchyroll tab.
+- If PiP does not start for a specific stream, browser or DRM limitations in the player are the most likely cause.
+
+## Development
+
+To build a release ZIP, run:
+
+```sh
+./scripts/build-release-zip.sh
+```
+
+The ZIP is written to `dist/`. Its version is read from `manifest.json`.
 
 ## License
 

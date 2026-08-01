@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Crunchyroll PiP Helper",
-  "description": "Forces Picture-in-Picture for Crunchyroll videos via button or keyboard shortcut. github.com/mlemors/crunchyroll-pip-extension",
+  "description": "Adds a Picture-in-Picture button and keyboard shortcut for Crunchyroll videos.",
   "version": "1.0.0",
   "homepage_url": "https://github.com/mlemors/crunchyroll-pip-extension",
   "permissions": ["scripting", "activeTab"],

@@ -1,5 +1,14 @@
 'use strict';
 
+function isCrunchyrollUrl(value) {
+  try {
+    const hostname = new URL(value).hostname;
+    return hostname === 'crunchyroll.com' || hostname === 'www.crunchyroll.com';
+  } catch {
+    return false;
+  }
+}
+
 async function runTogglePip(tabId) {
   await chrome.scripting.executeScript({
     target: { tabId },
@@ -44,7 +53,7 @@ chrome.commands.onCommand.addListener(async (command) => {
   }
 
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab?.id || !tab.url || !tab.url.includes('crunchyroll.com')) {
+  if (!tab?.id || !isCrunchyrollUrl(tab.url)) {
     return;
   }
 
@@ -57,7 +66,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab.id || !tab.url || !tab.url.includes('crunchyroll.com')) {
+  if (!tab.id || !isCrunchyrollUrl(tab.url)) {
     return;
   }
 
