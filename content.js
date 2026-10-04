@@ -20,6 +20,8 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement('div');
     toast.id = TOAST_ID;
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     toast.style.position = 'fixed';
     toast.style.bottom = '20px';
     toast.style.left = '20px';
@@ -51,7 +53,7 @@ function getActiveVideo() {
   if (!videos.length) {
     return null;
   }
-  return videos.find((v) => !v.paused && v.readyState >= 2) || videos[0];
+  return videos.find((v) => !v.paused && v.readyState >= 2) || videos.find((v) => v.readyState >= 2) || videos[0];
 }
 
 function isEpisodePage() {
@@ -69,6 +71,15 @@ function hasStartedPlayback(video) {
 }
 
 async function togglePiP() {
+  if (document.pictureInPictureElement) {
+    try {
+      await document.exitPictureInPicture();
+    } catch (error) {
+      showToast(`PiP failed: ${error?.message || 'Unknown error'}`);
+    }
+    return;
+  }
+
   const video = getActiveVideo();
   if (!video) {
     showToast('No video found. Start an episode first.');
@@ -92,7 +103,9 @@ async function togglePiP() {
     }
 
     if (typeof video.webkitSetPresentationMode === 'function') {
-      video.webkitSetPresentationMode('picture-in-picture');
+      video.webkitSetPresentationMode(
+        video.webkitPresentationMode === 'picture-in-picture' ? 'inline' : 'picture-in-picture'
+      );
       return;
     }
 
@@ -109,8 +122,8 @@ function buttonText(btn) {
     .toLowerCase();
 }
 
-function findSubtitleButton() {
-  const buttons = Array.from(document.querySelectorAll('button'));
+function findSubtitleButton(controls) {
+  const buttons = Array.from(controls.querySelectorAll('button'));
   const labels = ['untertitel', 'subtitle', 'subtitles', 'caption', 'captions'];
   return buttons.find((btn) => labels.some((label) => buttonText(btn).includes(label))) || null;
 }
@@ -173,8 +186,8 @@ function normalizePipButtonStyle(pipBtn, referenceButton) {
   pipBtn.style.alignSelf = 'center';
   pipBtn.style.color = 'inherit';
   pipBtn.style.flex = '0 0 auto';
-  pipBtn.style.width = `${Math.round(refRect.width)}px`;
-  pipBtn.style.height = `${Math.round(refRect.height)}px`;
+  pipBtn.style.width = `${Math.round(refRect.width) || 40}px`;
+  pipBtn.style.height = `${Math.round(refRect.height) || 40}px`;
 
   const refIcon = referenceButton.querySelector('svg');
   const refIconRect = refIcon ? refIcon.getBoundingClientRect() : null;
@@ -203,12 +216,16 @@ function mountPipButtonInControls() {
     return;
   }
 
-  const subtitleBtn = findSubtitleButton();
-  const subtitleWrapper = subtitleBtn?.closest('[data-testid="bottom-right-controls-stack"] > .kat\\:relative');
   const rightStack = document.querySelector('[data-testid="bottom-right-controls-stack"]');
-  if (!subtitleBtn || !subtitleWrapper || !rightStack) {
+  const subtitleBtn = rightStack && findSubtitleButton(rightStack);
+  if (!subtitleBtn) {
     removePipButton();
     return;
+  }
+  // Find the actual direct child, independent of the player's CSS framework.
+  let subtitleWrapper = subtitleBtn;
+  while (subtitleWrapper.parentElement !== rightStack) {
+    subtitleWrapper = subtitleWrapper.parentElement;
   }
 
   let pipWrapper = document.getElementById(BTN_WRAPPER_ID);
@@ -249,33 +266,23 @@ function bindVideoListeners(video) {
   video.dataset.crPipHelperBound = '1';
 
   ['play', 'playing', 'pause', 'timeupdate', 'loadedmetadata', 'seeking', 'ended'].forEach((name) => {
-    video.addEventListener(name, mountPipButtonInControls, { passive: true });
+    video.addEventListener(name, scheduleMount, { passive: true });
   });
 }
 
-function installHistoryHooks() {
-  if (window.__crPipHistoryHooked) {
-    return;
-  }
-  window.__crPipHistoryHooked = true;
-
-  const wrap = (fn) => function wrappedHistoryState(...args) {
-    const result = fn.apply(this, args);
-    window.dispatchEvent(new Event('cr-pip-route-change'));
-    return result;
-  };
-
-  history.pushState = wrap(history.pushState);
-  history.replaceState = wrap(history.replaceState);
+let mountScheduled = false;
+function scheduleMount() {
+  if (mountScheduled) return;
+  mountScheduled = true;
+  requestAnimationFrame(() => {
+    mountScheduled = false;
+    getVideos().forEach(bindVideoListeners);
+    mountPipButtonInControls();
+  });
 }
 
 function start() {
-  installHistoryHooks();
-
-  const observer = new MutationObserver(() => {
-    bindVideoListeners(getActiveVideo());
-    mountPipButtonInControls();
-  });
+  const observer = new MutationObserver(scheduleMount);
 
   observer.observe(document.documentElement || document.body, {
     childList: true,
@@ -285,17 +292,11 @@ function start() {
   bindVideoListeners(getActiveVideo());
   mountPipButtonInControls();
 
-  window.addEventListener('keydown', (event) => {
-    if (event.altKey && event.shiftKey && event.key.toLowerCase() === 'p') {
-      event.preventDefault();
-      togglePiP();
-    }
-  });
-
   window.addEventListener('popstate', mountPipButtonInControls, { passive: true });
   window.addEventListener('hashchange', mountPipButtonInControls, { passive: true });
-  window.addEventListener('cr-pip-route-change', mountPipButtonInControls, { passive: true });
-  setInterval(mountPipButtonInControls, 1200);
+  window.addEventListener('resize', scheduleMount, { passive: true });
+  // Page history methods live in a different JS world; polling also catches SPA navigation.
+  setInterval(scheduleMount, 1200);
 }
 
 if (document.readyState === 'loading') {

@@ -2,8 +2,8 @@
 
 function isCrunchyrollUrl(value) {
   try {
-    const hostname = new URL(value).hostname;
-    return hostname === 'crunchyroll.com' || hostname === 'www.crunchyroll.com';
+    const { hostname, protocol } = new URL(value);
+    return protocol === 'https:' && (hostname === 'crunchyroll.com' || hostname === 'www.crunchyroll.com');
   } catch {
     return false;
   }
@@ -13,12 +13,17 @@ async function runTogglePip(tabId) {
   await chrome.scripting.executeScript({
     target: { tabId },
     func: async () => {
+      if (document.pictureInPictureElement) {
+        await document.exitPictureInPicture();
+        return;
+      }
+
       const videos = Array.from(document.querySelectorAll('video'));
       if (!videos.length) {
         throw new Error('No video element found.');
       }
 
-      const video = videos.find((v) => !v.paused && v.readyState >= 2) || videos[0];
+      const video = videos.find((v) => !v.paused && v.readyState >= 2) || videos.find((v) => v.readyState >= 2) || videos[0];
 
       // Some players set this flag to block PiP in the UI.
       if (video.hasAttribute('disablePictureInPicture')) {
@@ -38,7 +43,9 @@ async function runTogglePip(tabId) {
 
       // Fallback for WebKit-based variants.
       if (typeof video.webkitSetPresentationMode === 'function') {
-        video.webkitSetPresentationMode('picture-in-picture');
+        video.webkitSetPresentationMode(
+          video.webkitPresentationMode === 'picture-in-picture' ? 'inline' : 'picture-in-picture'
+        );
         return;
       }
 
@@ -52,12 +59,11 @@ chrome.commands.onCommand.addListener(async (command) => {
     return;
   }
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (!tab?.id || !isCrunchyrollUrl(tab.url)) {
-    return;
-  }
-
   try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!Number.isInteger(tab?.id) || !isCrunchyrollUrl(tab.url)) {
+      return;
+    }
     await runTogglePip(tab.id);
   } catch (err) {
     // Handle silently; content button displays errors as a toast.
@@ -66,7 +72,7 @@ chrome.commands.onCommand.addListener(async (command) => {
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab.id || !isCrunchyrollUrl(tab.url)) {
+  if (!Number.isInteger(tab.id) || !isCrunchyrollUrl(tab.url)) {
     return;
   }
 

@@ -67,6 +67,12 @@ Keep the extracted folder in place; the browser loads the extension directly fro
 
 ## Development
 
+Run the regression tests with Node.js 22 or newer (no package installation needed):
+
+```sh
+node --test tests/*.test.cjs
+```
+
 To build a release ZIP, run:
 
 ```sh
@@ -74,6 +80,18 @@ To build a release ZIP, run:
 ```
 
 The ZIP is written to `dist/`. Its version is read from `manifest.json`.
+
+## Changes in 1.0.2
+
+- Handle the keyboard shortcut only through the browser command to avoid duplicate toggles.
+- Close an existing PiP window even when the selected video changes.
+- Prefer loaded videos over unloaded placeholders; fix WebKit fallback toggling.
+- Locate the subtitle button within the player controls without depending on a CSS framework class.
+- Batch DOM refreshes, bind replacement videos, and retain SPA navigation polling.
+- Add accessible status messages and ten regression tests.
+
+The regression suite uses simulated browser APIs and DOM fixtures. Playback on the live
+Crunchyroll site, DRM behavior, and browser shortcut dispatch require a separate browser check.
 
 ## License
 
