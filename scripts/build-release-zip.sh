@@ -17,6 +17,6 @@ mkdir -p "$DIST_DIR"
 rm -f "$ZIP_PATH"
 
 cd "$REPO_ROOT"
-zip -r "$ZIP_PATH" manifest.json background.js content.js >/dev/null
+zip -r "$ZIP_PATH" manifest.json background.js content.js assets/icons/*.png >/dev/null
 
 echo "Built: $ZIP_PATH"

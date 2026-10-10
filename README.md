@@ -81,6 +81,12 @@ To build a release ZIP, run:
 
 The ZIP is written to `dist/`. Its version is read from `manifest.json`.
 
+## Changes in 1.0.3
+
+- Add an orange PiP icon for the toolbar and extension management page.
+- Bundle PNG icons at 16, 32, 48, and 128 pixels in the release ZIP.
+- Rebuild icons with `python3 scripts/build-icons.py` (no dependencies required).
+
 ## Changes in 1.0.2
 
 - Handle the keyboard shortcut only through the browser command to avoid duplicate toggles.

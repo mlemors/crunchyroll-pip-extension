@@ -2,9 +2,12 @@
   "manifest_version": 3,
   "name": "Crunchyroll PiP Helper",
   "description": "Adds a Picture-in-Picture button and keyboard shortcut for Crunchyroll videos.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage_url": "https://github.com/mlemors/crunchyroll-pip-extension",
-  "permissions": ["scripting", "activeTab"],
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
   "host_permissions": [
     "https://www.crunchyroll.com/*",
     "https://crunchyroll.com/*"
@@ -26,11 +29,25 @@
         "https://www.crunchyroll.com/*",
         "https://crunchyroll.com/*"
       ],
-      "js": ["content.js"],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
   ],
   "action": {
-    "default_title": "Crunchyroll PiP"
+    "default_title": "Crunchyroll PiP",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png",
+      "48": "assets/icons/icon-48.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
   }
 }
