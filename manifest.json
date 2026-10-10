@@ -1,27 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Crunchyroll PiP Helper",
-  "description": "Adds a Picture-in-Picture button and keyboard shortcut for Crunchyroll videos.",
-  "version": "1.0.3",
+  "description": "Adds a Picture-in-Picture button with Option+P on macOS and Alt+P on Windows/Linux.",
+  "version": "1.0.5",
   "homepage_url": "https://github.com/mlemors/crunchyroll-pip-extension",
-  "permissions": [
-    "scripting",
-    "activeTab"
-  ],
+  "permissions": ["scripting"],
   "host_permissions": [
     "https://www.crunchyroll.com/*",
     "https://crunchyroll.com/*"
   ],
   "background": {
     "service_worker": "background.js"
-  },
-  "commands": {
-    "toggle-pip": {
-      "suggested_key": {
-        "default": "Alt+Shift+P"
-      },
-      "description": "Start Picture-in-Picture for the active Crunchyroll video"
-    }
   },
   "content_scripts": [
     {

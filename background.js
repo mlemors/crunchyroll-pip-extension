@@ -54,23 +54,6 @@ async function runTogglePip(tabId) {
   });
 }
 
-chrome.commands.onCommand.addListener(async (command) => {
-  if (command !== 'toggle-pip') {
-    return;
-  }
-
-  try {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (!Number.isInteger(tab?.id) || !isCrunchyrollUrl(tab.url)) {
-      return;
-    }
-    await runTogglePip(tab.id);
-  } catch (err) {
-    // Handle silently; content button displays errors as a toast.
-    console.warn('PiP toggle failed:', err);
-  }
-});
-
 chrome.action.onClicked.addListener(async (tab) => {
   if (!Number.isInteger(tab.id) || !isCrunchyrollUrl(tab.url)) {
     return;

@@ -18,8 +18,8 @@ The button appears only:
 - PiP button inside the right-side player controls
 - Position: directly left of the subtitle/track button
 - Keyboard shortcut:
-  - **macOS:** `Option + Shift + P`
-  - **Windows/Linux:** `Alt + Shift + P`
+  - **macOS:** `Option + P`
+  - **Windows/Linux:** `Alt + P`
 
 ## Browser compatibility
 
@@ -86,6 +86,16 @@ The ZIP is written to `dist/`. Its version is read from `manifest.json`.
 - Add an orange PiP icon for the toolbar and extension management page.
 - Bundle PNG icons at 16, 32, 48, and 128 pixels in the release ZIP.
 - Rebuild icons with `python3 scripts/build-icons.py` (no dependencies required).
+
+## Changes in 1.0.4
+
+- Handle the PiP hotkey directly in the Crunchyroll page so the browser preserves the user gesture required by PiP.
+- Use the physical P key code so macOS Option+P works even though macOS reports a different character.
+- Simplify the shortcut to Option+P / Alt+P.
+
+## Changes in 1.0.5
+
+- Remove the redundant `activeTab` permission; persistent access is already limited to Crunchyroll by the host permissions.
 
 ## Changes in 1.0.2
 

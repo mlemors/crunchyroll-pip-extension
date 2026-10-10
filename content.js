@@ -12,7 +12,23 @@ const PIP_ICON_SVG = `
 
 function getShortcutLabel() {
   const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
-  return isMac ? 'Option+Shift+P' : 'Alt+Shift+P';
+  return isMac ? 'Option+P' : 'Alt+P';
+}
+
+function handleShortcut(event) {
+  if (event.repeat || event.code !== 'KeyP' || !event.altKey || event.shiftKey || event.ctrlKey || event.metaKey) {
+    return;
+  }
+
+  const target = event.target;
+  if (target?.isContentEditable || target?.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]')) {
+    return;
+  }
+
+  // Use the physical key code: on macOS Option+P produces a different event.key character.
+  event.preventDefault();
+  event.stopPropagation();
+  togglePiP();
 }
 
 function showToast(message) {
@@ -292,6 +308,7 @@ function start() {
   bindVideoListeners(getActiveVideo());
   mountPipButtonInControls();
 
+  window.addEventListener('keydown', handleShortcut, true);
   window.addEventListener('popstate', mountPipButtonInControls, { passive: true });
   window.addEventListener('hashchange', mountPipButtonInControls, { passive: true });
   window.addEventListener('resize', scheduleMount, { passive: true });

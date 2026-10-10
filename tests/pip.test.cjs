@@ -59,14 +59,6 @@ test('background: only HTTPS Crunchyroll hosts are allowed', () => {
     assert.equal(context.isCrunchyrollUrl(url), false);
   }
 });
-test('background: tab lookup failure is handled', async () => {
-  const { context, handlers } = load('background.js');
-  context.chrome.tabs.query = async () => { throw new Error('Tab closed'); };
-  let warned = false;
-  context.console = { warn() { warned = true; } };
-  await handlers.command('toggle-pip');
-  assert.equal(warned, true);
-});
 test('content: mutation bursts schedule one refresh and bind all videos', () => {
   const { context } = load('content.js', { querySelectorAll: () => [video(), video()] });
   const callbacks = [];
@@ -97,7 +89,7 @@ test('content: player controls accept nested wrappers without CSS class dependen
   context.getActiveVideo = () => video();
   context.findSubtitleButton = (controls) => { assert.equal(controls, stack); return subtitle; };
   context.normalizePipButtonStyle = () => {};
-  context.getShortcutLabel = () => 'Alt+Shift+P';
+  context.getShortcutLabel = () => 'Alt+P';
   let inserted = false;
   stack.insertBefore = (element, before) => {
     assert.equal(element, pipWrapper); assert.equal(before, wrapper); inserted = true;
