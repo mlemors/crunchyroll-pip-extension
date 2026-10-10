@@ -83,31 +83,6 @@ The ZIP is written to `dist/`. Its version is read from `manifest.json`.
 
 Chrome Web Store screenshots and promotional images live in `assets/store/`; they are not included in the extension ZIP.
 
-## Changes in 1.0.3
-
-- Add an orange PiP icon for the toolbar and extension management page.
-- Bundle PNG icons at 16, 32, 48, and 128 pixels in the release ZIP.
-- Rebuild icons with `python3 scripts/build-icons.py` (no dependencies required).
-
-## Changes in 1.0.4
-
-- Handle the PiP hotkey directly in the Crunchyroll page so the browser preserves the user gesture required by PiP.
-- Use the physical P key code so macOS Option+P works even though macOS reports a different character.
-- Simplify the shortcut to Option+P / Alt+P.
-
-## Changes in 1.0.5
-
-- Remove the redundant `activeTab` permission; persistent access is already limited to Crunchyroll by the host permissions.
-
-## Changes in 1.0.2
-
-- Handle the keyboard shortcut only through the browser command to avoid duplicate toggles.
-- Close an existing PiP window even when the selected video changes.
-- Prefer loaded videos over unloaded placeholders; fix WebKit fallback toggling.
-- Locate the subtitle button within the player controls without depending on a CSS framework class.
-- Batch DOM refreshes, bind replacement videos, and retain SPA navigation polling.
-- Add accessible status messages and ten regression tests.
-
 The regression suite uses simulated browser APIs and DOM fixtures. Playback on the live
 Crunchyroll site, DRM behavior, and browser shortcut dispatch require a separate browser check.
 
