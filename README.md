@@ -81,6 +81,8 @@ To build a release ZIP, run:
 
 The ZIP is written to `dist/`. Its version is read from `manifest.json`.
 
+Chrome Web Store screenshots and promotional images live in `assets/store/`; they are not included in the extension ZIP.
+
 ## Changes in 1.0.3
 
 - Add an orange PiP icon for the toolbar and extension management page.
